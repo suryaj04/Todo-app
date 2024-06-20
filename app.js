@@ -23,6 +23,8 @@ cancel.addEventListener('click', ()=>{
 add.addEventListener('click', ()=>{
     details.innerHTML=''
     if(title.value == ''){
+        storeTodos() 
+        renderData()
         hide.classList.remove('hidden')
         hide.classList.add('block')
         setTimeout(()=>{
