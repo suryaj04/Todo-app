@@ -1,4 +1,10 @@
-let todos =[]
+let todos = [];
+if(localStorage.getItem('todos')) {
+    todos = JSON.parse(localStorage.getItem('todos'));
+}
+storeTodos=()=>{
+    localStorage.setItem('todos', JSON.stringify(todos));
+}
 let init = document.getElementById('init')
 let flex = document.getElementById('flex')
 let cancel = document.getElementById('cancelBtn')
@@ -16,40 +22,43 @@ cancel.addEventListener('click', ()=>{
 })
 add.addEventListener('click', ()=>{
     details.innerHTML=''
-    if(title.value==''){
+    if(title.value == ''){
         hide.classList.remove('hidden')
         hide.classList.add('block')
         setTimeout(()=>{
             hide.classList.remove('block')
             hide.classList.add('hidden')
         },1500)
-        renderData()
-    }
-    else{
+    } 
+    else {
         flex.classList.add('hidden')
-    let task = {
-        title: title.value,
-        desc: description.value
-    }
-    todos.push(task)
-    details.innerHTML =""
-    renderData()
-    
+        let task = {
+            title: title.value,
+            desc: description.value,
+            status: '' 
+        }
+        todos.push(task)
+        details.innerHTML = ""
+        storeTodos() 
+        renderData()
     }
 })
 let status = ''
 let text = 'Mark as completed'
-renderData=()=>{
-    todos.forEach((todo, index)=>{
+renderData = () => {
+    details.innerHTML = ''
+    todos.forEach((todo, index) => {
         if(todo.status === 'done'){
-             status = 'bg-green-100 border-green-600'
-             text = 'Task done'
-        }
-        else{
-            text ='Mark as completed'
+            status = 'bg-green-100 border-green-600'
+            text = 'Task done'
+        } 
+        else {
+            status = ''  
+            text = 'Mark as completed'
         }
         let div = document.createElement('div')
-        div.innerHTML = `<div id="color" class="border border-black  rounded-md w-full ${status} mx-auto my-5 p-3">
+        div.innerHTML = `
+            <div id="color" class="border border-black rounded-md w-full ${status} mx-auto my-5 p-3">
                 <div>
                     <h1 class="text-lg font-bold">${todo.title}</h1>
                     <p class="font-semibold">${todo.desc}</p>
@@ -58,58 +67,57 @@ renderData=()=>{
                         <button id="delete" data-id="${index}" class="text-neutral-400 font-semibold hover:text-red-500">Delete</button>
                     </div>
                 </div>
-          </div>`
-          details.appendChild(div)
-          let completed = document.querySelectorAll('#completed')
-    completed.forEach((complete)=>{
-        status =""
-        complete.addEventListener('mouseover', ()=>{
-            let colors = document.querySelectorAll('#color')
-            colors.forEach((color)=>{
-                color.classList.add('hover:border-green-600')
+            </div>`
+        details.appendChild(div)
+        let completed = document.querySelectorAll('#completed')
+        completed.forEach((complete) => {
+            complete.addEventListener('mouseover', () => {
+                let colors = document.querySelectorAll('#color')
+                colors.forEach((color) => {
+                    color.classList.add('hover:border-green-600')
+                })
+            })
+            complete.addEventListener('mouseout', () => {
+                let colors = document.querySelectorAll('#color')
+                colors.forEach((color) => {
+                    color.classList.remove('hover:border-green-600')
+                })
+            })
+            complete.addEventListener('click', (e) => {
+                let index = e.target.getAttribute('data-id')
+                let todo = todos[index]
+                todo.status = 'done'
+                storeTodos()
+                renderData()
             })
         })
-        complete.addEventListener('mouseout', ()=>{
-            let colors = document.querySelectorAll('#color')
-            colors.forEach((color)=>{
-                color.classList.remove('hover:border-green-600')
-            })
-        })
-        complete.addEventListener('click', (e)=>{
-            let index = e.target.getAttribute('data-id')
-            let todo = todos[index]
-            todo.status ='done'
-            details.innerHTML =""
-            renderData()
-        })
-    })
     })
     let deleteBtn = document.querySelectorAll('#delete')
-    deleteBtn.forEach((btn)=>{
-        btn.addEventListener('click', (e)=>{
+    deleteBtn.forEach((btn) => {
+        btn.addEventListener('click', (e) => {
             let index = e.target.getAttribute('data-id')
             todos.splice(index, 1)
-            details.innerHTML =""
+            storeTodos()
             renderData()
         })
-        
-})
+    })
+    hover()
+}
 hover=()=>{
     let deleteBtn = document.querySelectorAll('#delete')
-    deleteBtn.forEach((btn)=>{
-        btn.addEventListener('mouseover', ()=>{
+    deleteBtn.forEach((btn) => {
+        btn.addEventListener('mouseover', () => {
             let colors = document.querySelectorAll('#color')
-            colors.forEach((color)=>{
+            colors.forEach((color) => {
                 color.classList.add('hover:border-red-600')
             })
         })
-        btn.addEventListener('mouseout', ()=>{
+        btn.addEventListener('mouseout', () => {
             let colors = document.querySelectorAll('#color')
-            colors.forEach((color)=>{
+            colors.forEach((color) => {
                 color.classList.remove('hover:border-red-600')
             })
         })
-})
+    })
 }
-hover()
-}
+renderData()
