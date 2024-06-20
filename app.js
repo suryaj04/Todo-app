@@ -14,6 +14,7 @@ cancel.addEventListener('click', ()=>{
     flex.classList.add('hidden')
 })
 add.addEventListener('click', ()=>{
+    flex.classList.add('hidden')
     let task = {
         title: title.value,
         desc: description.value
