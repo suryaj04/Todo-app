@@ -65,8 +65,8 @@ renderData = () => {
                     <h1 class="text-lg font-bold">${todo.title}</h1>
                     <p class="font-semibold">${todo.desc}</p>
                     <div class="flex gap-2">
-                        <button id="completed" data-id="${index}" class="text-neutral-400 font-semibold hover:text-green-500">${text}</button>
-                        <button id="delete" data-id="${index}" class="text-neutral-400 font-semibold hover:text-red-500">Delete</button>
+                        <button id="completed" data-id="${index}" class="text-neutral-400  hover:text-green-500">${text}</button>
+                        <button id="delete" data-id="${index}" class="text-neutral-400  hover:text-red-500">Delete</button>
                     </div>
                 </div>
             </div>`
@@ -76,13 +76,18 @@ renderData = () => {
             complete.addEventListener('mouseover', () => {
                 let colors = document.querySelectorAll('#color')
                 colors.forEach((color) => {
-                    color.classList.add('hover:border-green-600')
+                    color.classList.add('hover:border-green-900')
+                    color.classList.add('hover:bg-green-100')
+                    color.addEventListener('mouseover', ()=>{
+                        color.classList.add('hover:shadow-lg')
+                    })
                 })
             })
             complete.addEventListener('mouseout', () => {
                 let colors = document.querySelectorAll('#color')
                 colors.forEach((color) => {
                     color.classList.remove('hover:border-green-600')
+                    color.classList.remove('hover:bg-green-100')
                 })
             })
             complete.addEventListener('click', (e) => {
@@ -112,14 +117,24 @@ hover=()=>{
             let colors = document.querySelectorAll('#color')
             colors.forEach((color) => {
                 color.classList.add('hover:border-red-600')
+                color.classList.add('hover:bg-red-100')
             })
         })
         btn.addEventListener('mouseout', () => {
             let colors = document.querySelectorAll('#color')
             colors.forEach((color) => {
                 color.classList.remove('hover:border-red-600')
+                color.classList.remove('hover:bg-red-100')
             })
         })
     })
 }
+let colors = document.querySelectorAll('#color')
+                colors.forEach((color) => {
+                    color.classList.add('hover:border-green-900')
+                    color.classList.add('hover:bg-green-100')
+                    color.addEventListener('mouseover', ()=>{
+                        color.classList.add('hover:shadow-2xl')
+                    })
+                })
 renderData()
