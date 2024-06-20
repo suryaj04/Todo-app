@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="output.css">
+</head>
+<body>
+   <div class="mx-auto w-[400px] my-20">
+       <div class="flex">
+        <div class="w-full mx-auto">
+            <h1 class="font-bold text-2xl tracking-tighter">What's up <span class="text-neutral-500  tracking-tighter">surya</span></h1>
+            <p class="font-semibold">Manage your tasks seamlessly !</p>
+        </div>
+        <img id="init" src="plus-square.svg" alt="">
+       </div>
+      <div id="flex" class=" gap-3 hidden flex-col items-center my-4">
+        <div class="flex gap-2">
+            <input id="title" type="text" placeholder="Enter the Title" class="input border-2 p-2 border-black w-[full] rounded-md"> 
+            <input id="description" type="text" placeholder="Enter the description" class="input border-2 p-2 w-[full%] border-black rounded-md">
+        </div>
+        <div class="flex gap-3 mx-auto w-[200px]">
+            <button id="addBtn" class="bg-black p-2 text-white rounded-md font-semibold w-full">Add task</button>
+            <button id="cancelBtn" class="bg-black p-2 rounded-md text-white font-semibold w-full">Cancel</button>
+          </div>
+      </div>
+      <div id="details">
+        
+      </div>
+   </div>
+    <script src="app.js"></script>
+</body>
+</html>
