@@ -6,6 +6,7 @@ let add = document.getElementById('addBtn')
 let title = document.getElementById('title')
 let description = document.getElementById('description')
 let details = document.getElementById('details')
+let hide = document.getElementById('hide')
 init.addEventListener('click', ()=>{
     flex.classList.remove('hidden')
     flex.classList.add('flex')
@@ -14,14 +15,27 @@ cancel.addEventListener('click', ()=>{
     flex.classList.add('hidden')
 })
 add.addEventListener('click', ()=>{
-    flex.classList.add('hidden')
+    details.innerHTML=''
+    if(title.value==''){
+        hide.classList.remove('hidden')
+        hide.classList.add('block')
+        setTimeout(()=>{
+            hide.classList.remove('block')
+            hide.classList.add('hidden')
+        },1500)
+        renderData()
+    }
+    else{
+        flex.classList.add('hidden')
     let task = {
         title: title.value,
         desc: description.value
     }
     todos.push(task)
     details.innerHTML =""
-   renderData()
+    renderData()
+    
+    }
 })
 let status = ''
 let text = 'Mark as completed'
