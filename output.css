@@ -2682,10 +2682,6 @@ video {
 }
 
 @media (min-width: 640px) {
-  .sm\:mt-20 {
-    margin-top: 5rem;
-  }
-
   .sm\:mt-40 {
     margin-top: 10rem;
   }
@@ -2704,10 +2700,6 @@ video {
 
   .sm\:flex-nowrap {
     flex-wrap: nowrap;
-  }
-
-  .sm\:bg-\[\] {
-    background-color: ;
   }
 
   .sm\:bg-\[\#FFD31A\] {
