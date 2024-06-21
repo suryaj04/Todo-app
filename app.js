@@ -21,7 +21,6 @@ cancel.addEventListener('click', ()=>{
     flex.classList.add('hidden')
 })
 add.addEventListener('click', ()=>{
-    
     details.innerHTML=''
     if(title.value == ''){
         storeTodos() 
