@@ -21,6 +21,7 @@ cancel.addEventListener('click', ()=>{
     flex.classList.add('hidden')
 })
 add.addEventListener('click', ()=>{
+    
     details.innerHTML=''
     if(title.value == ''){
         storeTodos() 
@@ -43,6 +44,8 @@ add.addEventListener('click', ()=>{
         details.innerHTML = ""
         storeTodos() 
         renderData()
+        title.value = ''
+        description.value = ''
     }
 })
 let status = ''
@@ -55,18 +58,18 @@ renderData = () => {
             text = 'Task done'
         } 
         else {
-            status = ''  
-            text = 'Mark as completed'
+            status = 'bg-[#FFD217]'  
+            text = 'Mark as done'
         }
         let div = document.createElement('div')
         div.innerHTML = `
-            <div id="color" class="border border-black rounded-md w-full ${status} mx-auto my-5 p-3">
-                <div>
+            <div id="color" class="border-2 border-black  rounded-md w-full ${status} mx-auto my-5 p-3">
+                <div class="">
                     <h1 class="text-lg font-bold">${todo.title}</h1>
                     <p class="font-semibold">${todo.desc}</p>
-                    <div class="flex gap-2">
-                        <button id="completed" data-id="${index}" class="text-neutral-400  hover:text-green-500">${text}</button>
-                        <button id="delete" data-id="${index}" class="text-neutral-400  hover:text-red-500">Delete</button>
+                    <div class="flex gap-4 mt-2 p-1 rounded-md">
+                        <button id="completed" data-id="${index}" class="sm:text-black font-semibold text-green-500 sm:hover:text-green-500">${text}</button>
+                        <button id="delete" data-id="${index}" class="sm:text-black font-semibold sm:hover:text-red-500 text-red-500">Delete</button>
                     </div>
                 </div>
             </div>`
